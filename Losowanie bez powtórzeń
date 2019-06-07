@@ -1,1 +1,83 @@
-//Program ma nam wylosować 5 liczb bez powtórzeń. Liczby wylosowane mają być z przedziału od 1 do 10.
+/******************************************************************************
+Program ma za zadanie wylosować bez powtórzeń c liczb z zakresu <a,b>
+i wypisać je na ekranie.
+
+*******************************************************************************/
+
+#include <iostream>
+#include <time.h>
+
+using namespace std;
+
+/* Funkcja losująca liczbę z zakresu <a,b> */ 
+int losuj(int a,int b)
+{
+    return (rand()%(b-a+1)+a);
+}
+
+/* Funkcja sprawdzająca, czy wylosowana liczba już wcześniej 
+nie została wylosowana i zapisana w tablicy */
+
+int sprawdz(int tab[], int ile, int liczba_wylosowana)
+{
+    int wynik;
+    
+    for (int i=0; i<ile; i++)
+    {
+        wynik = liczba_wylosowana-tab[i];
+        if (wynik==0)
+        {
+            break;
+        }
+    }
+    
+    return wynik;
+
+}
+
+int main()
+{
+    srand(time(NULL));
+
+ /* Zmienne: a-początek przedziału, z którego losowane są liczby;
+ b-koniec przedziału; c- ilość wylosowanych liczb.
+ Aby losowanie było poprawne musi być spełniony warunek (b-a+1)<c */
+ 
+    int a=1;
+    int b=10;
+    int c=3;
+    
+    if ((b-a+1)<=c)
+    {
+        cout<<"Podaj inny przedział"<<endl;
+        return 0;
+    }
+    
+    int tab_wylosowanych[c];
+    tab_wylosowanych[0] = losuj(a,b);
+    int ile_wylosowano = 1;
+    
+    while (ile_wylosowano<(c+1))
+    
+    {
+        int wylosowana = losuj(a,b);
+        int wynik=sprawdz(tab_wylosowanych,ile_wylosowano,wylosowana);
+    
+        if (wynik!=0)
+        {
+            tab_wylosowanych[ile_wylosowano]=wylosowana;
+            ile_wylosowano++;
+        }
+    
+    }
+   
+   
+   for (int i=0; i<c; i++)
+   {
+       cout<<i+1<<". liczba: "<<tab_wylosowanych[i]<<endl;
+   }
+    
+    
+
+    return 0;
+}
