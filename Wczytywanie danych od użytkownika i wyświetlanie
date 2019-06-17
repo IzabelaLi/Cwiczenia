@@ -1,6 +1,8 @@
 /******************************************************************************
 Program ma za zadanie wczytać od użytkowanika dane (imię, nazwisko i wiek)
 a następnie wyświetlić je na ekranie.
+Jest to rozwiązanie zadania domowego ze strony internetowej kursu C++ :
+http://cpp0x.pl/kursy/Kurs-C++/Poziom-3/Wczytywanie-tekstu-standardowy-strumien-wejscia/351
 *******************************************************************************/
 
 #include <iostream>
