@@ -1,0 +1,132 @@
+/******************************************************************************
+Program ma za zadanie wczytać od użytkowanika dane (imię, nazwisko i wiek)
+a następnie wyświetlić je na ekranie.
+*******************************************************************************/
+
+#include <iostream>
+#include <string>
+
+/* Funkcja wczytująca od użytkownika kolejno: imię, nazwisko i wiek*/
+
+void wczytajOsobe(std::string &imie,std::string &nazwisko, int &wiek, int n)
+
+{
+   
+    std::cout<<"Podaj "<<n<<". imie: "; std::cin>>imie; 
+   
+    std::cout<<"Podaj "<<n<<". nazwisko: "; std::cin>>nazwisko; 
+    
+    std::cout<<"Podaj "<<n<<". wiek: "; std::cin>>wiek;
+
+/* W przypadku podania błędnego typu danych w sekcji "wiek" program ma zignorować
+flagę błędu, wyczyścić strumień cin i oczekiwać na podanie poprawnych danych dopóki
+nie zostaną wprowadzone */
+
+    while (std::cin.fail())
+    
+    {
+        std::cin.clear(); 
+        std::cin.ignore( 1000, '\n' ); 
+        std::cout<<"Podaj "<<n<<". wiek: "; std::cin>>wiek;
+    }
+    
+    
+    std::cout<<std::endl;
+    
+}
+
+/* Funkcja wypisująca dane w postaci: Jan Kowalski, 21 lat */
+
+void wypiszOsobe(std::string imie, std::string nazwisko, int wiek, int n)
+
+{   /* Tablica liczb, pomocna przy weryfikacji, czy po podanej liczbie 
+    oznaczającej wiek program ma wypisać "lat", czy "lata", np "...14 lat", 
+    czy "...23 lata" 
+       Wszystkie liczby kończące się na 2, 3, 4 (np. 23, 62, 84, 103) będą wpisane
+    do tablicy jako te, po których ma nastąpić odmiana "lata" */
+    
+    int tab[150];
+    
+    tab[0]=2; tab[1]=3; tab[2]=4; 
+    
+    for (int i=3; i<100; i=i+3)
+    
+    {
+        tab[i]=tab[i-3]+10;
+        tab[i+1]=tab[i-2]+10;
+        tab[i+2]=tab[i-1]+10;
+    }
+    
+    /* Wyjątkami będą liczby 12,13,14,112,113,114..ect. które wcześniej 
+    już wpisane do tablicy zostaną nadpisane liczbami 2 */
+    
+    for (int i=3; i<100; i=i+30)
+    
+    {
+        tab[i]=2;
+        tab[i+1]=2;
+        tab[i+2]=2;
+    }
+    
+    
+    //Kontrolne wyświetlenie liczb w tablicy
+    
+    /*
+    for(int i=0; i<100; i++)
+    {
+        std::cout<<tab[i]<<" ";
+    }
+    */
+    
+    
+    /* Domyslnie zdanie wyswitlające dane będzie kończyć się na "lat" - do tego
+    wykorzystanie zostana zmienna typu bool ustawiona domyślnie jako fałsz.
+    Zmienna ta zostanie ustawiona jako prawda w momencie, gdy 
+    podany przez użytkownika wiek będzie równy którejś z liczb w powyżej 
+    utworzonej tablicy, wtedy zamiast "lat" program wyświetli "lata" */
+    
+    bool lata=false;
+    
+    for (int i=0;i<100;i++)
+    {
+        if (tab[i]==wiek)
+        {
+            lata=true;
+            break;
+        }
+    }
+    
+    if (lata)
+        {
+            std::cout<<n<<".osoba: "<<imie<<" "<<nazwisko<<", "<<wiek<<" lata."<<std::endl;
+        }
+        
+        else
+        {
+            std::cout<<n<<".osoba: "<<imie<<" "<<nazwisko<<", "<<wiek<<" lat."<<std::endl;
+        }
+    
+    std::cout<<std::endl;
+    
+    
+}
+using namespace std;
+
+int main()
+{
+    std::string imie[ 2 ];
+    std::string nazwisko[ 2 ];
+    int wiek[ 2 ];
+    
+    /* 2-krotne Wywołanie funkcji wczytującej dane*/
+    
+    for( int i = 0; i < 2; i++ )
+         wczytajOsobe( imie[ i ], nazwisko[ i ], wiek[ i ], i+1 );
+    
+    /* 2-krotne Wywołanie funkcji wypisującej dane*/
+    
+    for( int i = 0; i < 2; i++ )
+         wypiszOsobe( imie[ i ], nazwisko[ i ], wiek[ i ], i+1 );
+    
+    return 0;
+}
