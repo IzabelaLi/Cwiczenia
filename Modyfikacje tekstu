@@ -1,0 +1,83 @@
+/******************************************************************************
+
+Program ma za zadanie usuwać powtarzające się występujące obok siebie spacje z
+podanego tekstu, oraz każdy ciąg znaków "<b>" zastępować przez "[b]" oraz "</b>"
+przez "[/b]". Jest to rozwiązanie zadania domowego ze strony internetowej 
+kursu C++: 
+http://cpp0x.pl/kursy/Kurs-C++/Poziom-3/Modyfikowanie-tekstu-i-sprawdzanie-jego-dlugosci/353
+
+*******************************************************************************/
+
+
+#include <iostream>
+#include <string>
+
+/* Funkcja formatująca tekst.
+
+Jako pierwsze usuwane są powtarzające się spacje przez znalezienie metodą find()
+numeru pozycji znaku spacji w tekście a następnie sprawdzanie każdej następnej 
+pozycji tekstu czy jest to spacja i ewentualne usuwanie jej metodą erase().
+Po tym program wyszukuje następną spację w tekście także metodą find(), lecz z
+dodatkowym argumentem którym jest zinkrementowana liczba oznaczjąca poprzednią 
+pozycję spacji, a następnie analogicznie usuwa powtarzające się spacje. 
+Postępowanie to jest zapętlone do końca tekstu. */
+
+std::string konwertuj( std::string sTekst )
+{
+    std::string sWynik=sTekst;
+    
+    size_t n=sWynik.find(" ");
+    
+    do
+    {
+         while (sWynik[n+1]==' ')
+         {
+             sWynik.erase(n+1,1);
+         }
+    
+        n=sWynik.find(" ", n+1);
+    }
+    while (n!=std::string::npos);
+   
+ /* Poniżej wyszukiwana jest pozycja frazy "<b>" w tekście, a następnie pozycje, 
+ na których znajdują się ostre nawiasy nadpisywane są nawiasami kwadratowymi.
+ Postępowanie to jest zapętlone przez inkrementowanie argumentu metody find()
+ oznaczającego pozycję wystąpienia frazy w pętli while.*/
+ 
+    size_t m =sWynik.find("<b>");
+    
+    do
+    {
+        sWynik[m]='[';
+        sWynik[m+2]=']';
+        m=sWynik.find("<b>", m+1);
+    }
+    while (m!=std::string::npos);
+    
+ /* Poniżej fraza "</b>" zamieniana jest na [/b] w analogiczny sposób. */
+ 
+    size_t o =sWynik.find("</b>");
+    
+    do
+    {
+        sWynik[o]='[';
+        sWynik[o+3]=']';
+        o=sWynik.find("</b>", o+1);
+    }
+    while (o!=std::string::npos);
+    
+    
+    return sWynik;
+}
+
+int main()
+{
+/* wyświtlenie tekstu, który będzie konwertowany a nastęnie wyświetlenie 
+sformatowanego tekstu przez wywołanie funkcji konwertuj. */
+
+   std::string text="       <b>        <b></b><</n>  <b>>       jknl    jhjh  jjkh h";
+   std::cout<<text<<std::endl<<konwertuj(text);
+
+return 0;
+    
+}
