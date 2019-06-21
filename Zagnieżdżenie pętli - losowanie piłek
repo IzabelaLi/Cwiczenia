@@ -11,33 +11,29 @@ http://cpp0x.pl/kursy/Kurs-C++/Poziom-3/Zagniezdzanie-petli/347
 using namespace std;
 
 int main()
-{
- 
+{ 
  int tab[3];
  int n=0;
  
  for (int i=1; i<6; i++)
  {
      tab[0]=i;
-     
-     
+      
      for (int i=2; i<6; i++)
      {
          tab[1]=i;
-         
-         
+                  
          for (int i=3; i<6; i++)
          {
              tab[2]=i;
              
              cout<<tab[0]<<" "<<tab[1]<<" "<<tab[2]<<endl;
-             n++;
-            
+             n++;    
          }
      }
  }
  
  cout<<"Liczba kombinacji: "<<n;
  
-    return 0;
+ return 0;
 }
