@@ -11,8 +11,8 @@ http://cpp0x.pl/kursy/Kurs-C++/Poziom-3/Zagniezdzanie-petli/347
 using namespace std;
 
 int main()
-{
- 
+
+{ 
  int tab[5];
  int n=0;
  
@@ -20,22 +20,18 @@ int main()
  {
      tab[0]=i;
      
-     
      for (int i=1; i<4; i++)
      {
-         tab[1]=i;
-         
+         tab[1]=i;  
          
          for (int i=1; i<4; i++)
          {
-             tab[2]=i;
-             
+             tab[2]=i;     
              
              for (int i=1; i<4; i++)
              {
                  tab[3]=i;
-                 
-                 
+                            
                  for (int i=1; i<4; i++)
                  {
                     tab[4]=i;
@@ -47,7 +43,7 @@ int main()
      }
  }
  
- cout<<"Liczba kombinacji: "<<n;
+   cout<<"Liczba kombinacji: "<<n;
  
-    return 0;
+   return 0;
 }
