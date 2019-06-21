@@ -1,0 +1,71 @@
+/******************************************************************************
+Program ma na celu posortować tablicę metodą bombelkową przy użyciu wskaźników.
+Jest to rozwiązanie zadania domowego ze strony kursu C++ :
+http://cpp0x.pl/kursy/Kurs-C++/Poziom-5/Wskazniki/580
+*******************************************************************************/
+#include <iostream>
+
+using namespace std;
+
+/*Funkcja sortująca tablicę */
+
+void sortuj(int *tab_start, int *tab_end)
+
+{   /*Do posortowania tablicy zostanie wykorzystana metoda bombelkowa. 
+    Liczba cykli sortowania nie będzie jednak równa ilości liczb w sortowanej tablicy.
+    Aby uniknąć zbędych cyklów sortowania po tym, jak tablica będzie już posortowana,
+    posłużę się wskaźnikiem k, który będzie zliczał ilość zamian elementów tablicy
+    w jednym cyklu. Przed wejściem do cyklu (pętla for) będzie zerowany a po nim
+    sprawdzany, czy wynosi zero. Taki wynik informuje o tym, że tablica jest już
+    posortowana i należy wyjść z pętli. Początkowa wartość k przed wejściem do pętli 
+    while nie ma znaczenia, jedynie ma spełniać warunek (k!=0)*/
+    
+    int k=10;
+    while (k!=0)
+    {
+        k=0;
+        for (int *i=tab_start; i<tab_end; i++)
+        {
+            if (*i> *(i+1))
+            {                
+                k++;
+                int x=*i;
+                *i=*(i+1);
+                *(i+1)=x;
+            }    
+        }
+        
+        if (k==0)
+        {
+            break;
+        }       
+    }
+}
+
+/*Funkcja wypisująca elementy tablicy*/
+
+void wypisz(int *tab, int n)
+{
+    for (int i=0; i<n; i++)
+    {
+        cout<<*(tab+i)<<" ";
+    }    
+}    
+
+int main()
+{
+    /* Deklaracja tablicy, które będą sortowane a następnie wywołanie funkcji 
+    sortującej i wypisującej tablicę*/
+    
+    int tab[ 10 ] = { 0, 9, 1, 3, 8, 2, 6, 7, 5, 4 };
+    sortuj( tab, tab + 10 );
+    wypisz( tab, 10 );
+    
+    std::cout << '\n';
+    
+    int tab2[ 16 ] = { 9, 7, 8, 6, 5, 4, 4, 0, 9, 6, 7, 1, 6, 3, 1, - 100 };
+    sortuj( tab2, tab2 + 15 );
+    wypisz( tab2, 15 );   
+    
+    return 0;
+}
