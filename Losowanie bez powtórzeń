@@ -32,7 +32,6 @@ int sprawdz(int tab[], int ile, int liczba_wylosowana)
     }
     
     return wynik;
-
 }
 
 int main()
@@ -68,16 +67,12 @@ int main()
             tab_wylosowanych[ile_wylosowano]=wylosowana;
             ile_wylosowano++;
         }
-    
     }
-   
-   
+      
    for (int i=0; i<c; i++)
    {
        cout<<i+1<<". liczba: "<<tab_wylosowanych[i]<<endl;
    }
     
-    
-
     return 0;
 }
