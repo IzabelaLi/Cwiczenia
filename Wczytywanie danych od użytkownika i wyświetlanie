@@ -13,7 +13,6 @@ http://cpp0x.pl/kursy/Kurs-C++/Poziom-3/Wczytywanie-tekstu-standardowy-strumien-
 void wczytajOsobe(std::string &imie,std::string &nazwisko, int &wiek, int n)
 
 {
-   
     std::cout<<"Podaj "<<n<<". imie: "; std::cin>>imie; 
    
     std::cout<<"Podaj "<<n<<". nazwisko: "; std::cin>>nazwisko; 
@@ -32,9 +31,7 @@ nie zostaną wprowadzone */
         std::cout<<"Podaj "<<n<<". wiek: "; std::cin>>wiek;
     }
     
-    
-    std::cout<<std::endl;
-    
+    std::cout<<std::endl;    
 }
 
 /* Funkcja wypisująca dane w postaci: Jan Kowalski, 21 lat */
@@ -108,10 +105,9 @@ void wypiszOsobe(std::string imie, std::string nazwisko, int wiek, int n)
             std::cout<<n<<".osoba: "<<imie<<" "<<nazwisko<<", "<<wiek<<" lat."<<std::endl;
         }
     
-    std::cout<<std::endl;
-    
-    
+    std::cout<<std::endl;    
 }
+
 using namespace std;
 
 int main()
