@@ -65,12 +65,12 @@ std::string konwertuj( std::string sTekst )
         o=sWynik.find("</b>", o+1);
     }
     while (o!=std::string::npos);
-    
-    
+     
     return sWynik;
 }
 
 int main()
+
 {
 /* wyświtlenie tekstu, który będzie konwertowany a nastęnie wyświetlenie 
 sformatowanego tekstu przez wywołanie funkcji konwertuj. */
