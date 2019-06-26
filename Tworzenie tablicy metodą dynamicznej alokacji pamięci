@@ -1,0 +1,75 @@
+/******************************************************************************
+Program ma za zadanie zapisywać liczby podane przed użytkownika do tablicy 
+tworzonej metodą dynamicznej alokacji pamięci. Po każdej wczytanej liczbie 
+sprawdza, czy w tablicy pozostało jeszcze miejsce do zapisania jej, na następnie
+podejmuje decyzje o powiękdzeniu tablicy (a właściwie utworzeniu nowej i 
+zastąpieniu przez nią starej tablicy) Jest to rozwiązanie zadania domowego
+ze strony internetowej kursu C++, w którym podany przykład modyfikuję, aby 
+zamiast każdorazowego powiększania tablicy przy dodawaniu liczby, powiększa się
+co 5 wpisanych liczb.
+http://cpp0x.pl/kursy/Kurs-C++/Poziom-5/Zarzadzanie-pamiecia-new-delete/581
+*******************************************************************************/
+
+#include <iostream>
+#include <limits>
+
+using namespace std;
+
+int main()
+{
+    int *tablica=nullptr;
+    int rozmiar=0; //aktualny rozmiar tablicy
+    int ilosc=0; //ilosc liczb, która jest zapisanaw tablicy
+    
+    while (true)
+    {
+        int liczba;
+        cout<<"Podaj liczbe, jaka chcesz zapisac. '0' konczy wczytywanie"<<endl;
+        cin>>liczba;
+        ilosc++;
+        if (liczba==0)
+        {
+            break;
+        }
+        if (ilosc>=rozmiar)
+        {
+            cout<<"Brakuje miejsca, tworze nowa tablice"<<endl;
+            rozmiar=rozmiar+5;
+            cout<<"Zaczynam kopiowac dane"<<endl;
+            int *nowa_tablica=new int[rozmiar];
+            
+            if (tablica!=NULL)
+            {
+                for (int i=0; i<ilosc-1; i++)
+                {
+                    nowa_tablica[i]=tablica[i];
+                }
+            }
+                
+            cout<<"Skopiowałem, teraz dodam nową wartosc."<<endl;
+            nowa_tablica[ilosc-1]=liczba;
+            cout<<"Gotowe, usuwam starą tablicę"<<endl;
+            delete[] tablica ;
+            cout<<"Aktualizuje wskaznik"<<endl;
+            tablica=nowa_tablica;
+            cout<<"Gotowe."<<endl;
+        }
+        
+        else
+        {
+            tablica[ilosc-1]=liczba;
+            cout<<"Liczba zapisana."<<endl;
+        }
+    }
+    
+    cout<<"--> Koniec programu"<<endl;
+    cout<<endl<<"Liczby, jakie wypisałes/łas:"<<endl;
+    
+    for (int i=0; i<ilosc-1; i++)
+    {
+        cout<<tablica[i]<<" ";
+    }
+    
+    delete[] tablica;
+    return 0;
+}
