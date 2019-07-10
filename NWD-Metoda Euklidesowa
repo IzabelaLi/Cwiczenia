@@ -1,0 +1,60 @@
+/******************************************************************************
+
+Program ma za zadanie obliczyć Największy Wspólny Dzielnik dwóch liczb podanych
+przez użytkownika dwoma metodami : iteracyjną i rekurencyjną.
+
+*******************************************************************************/
+
+#include <iostream>
+
+using namespace std;
+
+/*Metoda iteracyjna*/
+int NWD(int n, int m)
+{
+    int r=n%m;
+    while (r!=0)
+    {
+        n=m;
+        m=r;
+        r=n%m;
+    }
+    return m;
+}
+/*Metoda rekurencyjna*/
+int NWD_re(int n, int m)
+{
+    if (n%m==0)
+    return m;
+    
+    if (n%m>0)
+    {
+        return NWD_re(m,n%m);
+    }
+}
+
+int main()
+{
+    cout<<"Podaj 2 liczby"<<endl;
+    int n,m;
+    cin>>n;
+    cin>>m;
+    
+    if (n==0||m==0)
+    {
+        cout<<"'0' nie ma dzielnikow, sprubuj jeszcze raz.";
+        return 0;
+    }
+    /*Do poprawnego działania algorytmu liczba n musi być większa niż m*/
+    if (n-m<0)
+    {
+        int c=n;
+        n=m;
+        m=c;
+    }
+  
+    cout<<endl<<"Największy wspólny dzielnik (metoda iteracyjna)to "<<NWD(n,m);
+    cout<<endl<<"Największy wspólny dzielnik (metoda rekurencyjna) to "<<NWD_re(n,m);
+
+    return 0;
+}
