@@ -1,0 +1,104 @@
+/******************************************************************************
+Program ma za zadanie posortować wylosowane liczby metodą Quick Sort.
+*******************************************************************************/
+
+#include <iostream>
+#include <time.h>
+
+using namespace std;
+
+/*Ile liczb będzie znajdowało się w tablicy do posortowania*/
+int ile_liczb=40;
+/*Funkcja losująca liczby, które mają być posortowane*/
+int Wylosuj(int tablica[], int ile_liczb)
+{
+    for (int i=0; i<ile_liczb; i++)
+    {
+        tablica[i]=rand()%100;
+    }
+    return tablica[0];
+}
+/*Funkcja partycjonująca podany przedział <a,b> względem a*/
+void Partycjonuj(int tablica[], int a, int b)
+{
+    while (b>a)
+    {
+        while (!(tablica[b]< tablica[a]))
+        {
+            if (a>=b)
+            {
+                break;
+            }
+            b--;
+        }
+        int bufor=tablica[b];
+        tablica[b]=tablica[a];
+        tablica[a]=bufor;
+        
+        while (!(tablica[a]>=tablica[b]))
+        {
+            if (a>=b)
+            {
+                break;
+            }
+            a++;
+        }
+        int bufor2=tablica[a];
+        tablica[a]=tablica[b];
+        tablica[b]=bufor2;
+    }
+}
+/*Funkcja zwracająca pozycję osi przedziale <pocztątek,koniec>*/
+int Znajdz_Os(int tablica[], int pierwsza, int poczatek, int koniec)
+{
+    for (int i=poczatek ; i<koniec ; i++)
+    {
+        if (tablica[i]==pierwsza)
+        return i;
+    }
+}
+/*Funckcja rekurencujna Quick Sort*/
+void Quick_Sort(int tablica[], int lewa, int prawa)
+{
+    int os;
+    int a=lewa;
+    int b=prawa;
+    int pierwsza=tablica[a];
+    
+    if (b>a)
+    {
+        Partycjonuj(tablica, a, b);
+        os=Znajdz_Os(tablica, pierwsza, a, b); 
+        Quick_Sort(tablica, a, os); 
+        Quick_Sort(tablica, os+1, b); 
+    }
+}
+
+int main()
+{
+    srand(time(NULL));
+    /*Deklaracja tablicy oraz pozycji jej początku i końca*/
+    int tablica[ile_liczb];
+    int lewa=0;
+    int prawa=ile_liczb-1;
+    /*Losowanie liczb, które będą posortowane*/
+    Wylosuj(tablica, ile_liczb);
+    /*Wyświetlenie wylosowanych liczb*/
+    cout<<"Tablica: "<<endl;
+    for (int i=0; i<ile_liczb; i++)
+    {
+        cout<<tablica[i]<<" ";
+    }
+    cout<<endl;
+    /*Sortowanie metodą Quick Sort*/
+    Quick_Sort(tablica, lewa, prawa);
+    /*Wyświetlenie posortowanych liczb*/
+    cout<<"Tablica posortowana: "<<endl;
+    for (int i=0; i<ile_liczb; i++)
+    {
+        cout<<tablica[i]<<" ";
+    }
+    cout<<endl;
+
+    return 0;
+}
