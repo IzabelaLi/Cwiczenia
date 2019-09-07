@@ -1,0 +1,35 @@
+/******************************************************************************
+Program ma za zadanie narysować szachownicę o wymiarach x,y podanych przez 
+użytkownika. Szachownica złożona jest z cyfr 0 i 1.
+*******************************************************************************/
+
+#include <iostream>
+
+using namespace std;
+
+void szachownica(int x, int y)
+{
+    bool jeden = 1;
+    for (int i=0; i<y; i++)
+    {
+        for (int j=0; j<x; j++)
+        {
+            cout<<jeden;
+            jeden=(!jeden);
+        }
+        cout<<endl;
+        jeden=(!jeden);
+    }
+}
+
+int main()
+{
+    int x,y;
+    cout<<"Podaj x: ";
+    cin>>x;
+    cout<<endl<<"Podaj y: ";
+    cin>>y;
+    szachownica(x,y);
+
+    return 0;
+}
