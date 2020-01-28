@@ -1,0 +1,46 @@
+/******************************************************************************
+  Program zamienia liczbę dziesiętną na szesnastkową
+*******************************************************************************/
+
+#include <iostream>
+
+using namespace std;
+
+int main()
+{
+    int liczba_dec=0;
+    string liczba="";
+    int licznik=0;
+    
+    cout<<"Podaj liczbę:"<<endl;
+    cin>>liczba_dec;
+    
+    int wynik=liczba_dec;
+    
+    while (wynik!=0)
+    {
+        int reszta = wynik%16;
+        if ((reszta>=0)&&(reszta<=9))
+        {
+            liczba+=(wynik%16)+48;
+            licznik++;
+        }
+        else if ((reszta>=10)&&(reszta<=15))
+        {
+            liczba+=(wynik%16)+55;
+            licznik++;
+        }
+        else
+        {
+            cout<<endl<<"blad!";
+        }
+        wynik/=16;
+    }
+
+    for (int i = licznik-1; i>=0; i--)
+    {
+        cout<<liczba[i];
+    }
+
+    return 0;
+}
