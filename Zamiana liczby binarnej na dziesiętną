@@ -1,0 +1,39 @@
+/******************************************************************************
+
+Program zamienia liczbę binarną 8-bitową na dziesiętną
+
+*******************************************************************************/
+
+#include <iostream>
+#include <math.h>
+
+using namespace std;
+
+int main()
+{
+    char liczba_bin[8];
+    int liczba=0;
+    cout<<"Podaj liczbe:"<<endl;
+    cin>>liczba_bin;
+    
+    for (int i=0; i<8; i++)
+    {
+        if (liczba_bin[i]=='1')
+        {
+            liczba+=pow(2,7-i);
+        }
+        else if (liczba_bin[i]=='0')
+        {
+            
+        }
+        else
+        {
+            cout<<"Nieprawidlowy znak!";
+            return 0;
+        }
+    }
+    
+    cout<<endl<<liczba;
+    
+    return 0;
+}
