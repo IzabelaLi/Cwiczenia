@@ -1,0 +1,39 @@
+/******************************************************************************
+
+Program zamienia liczbę dziesiętną na binarną przez operacje bitowe
+
+*******************************************************************************/
+
+#include <iostream>
+#include <math.h>
+
+using namespace std;
+
+int main()
+{
+    int liczba=0;
+    int spacja=0;
+    cout<<"Podaj liczbe:"<<endl;
+    cin>>liczba;
+    
+    for (int i = 31; i>=0; i--)
+    {
+        if ((liczba|(1<<i))==liczba)
+        {
+            cout<<1;
+            spacja++;
+        }
+        else
+        {
+            cout<<0;
+            spacja++;
+        }
+        if (spacja==4)
+        {
+            cout<<" ";
+            spacja=0;
+        }
+    }
+    
+    return 0;
+}
