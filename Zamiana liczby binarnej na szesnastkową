@@ -1,0 +1,67 @@
+/******************************************************************************
+Program zamienia liczbę binarną na szesnastkową
+*******************************************************************************/
+
+#include <iostream>
+#include <string>
+#include <math.h>
+
+using namespace std;
+
+int main()
+{
+    cout<<"Podaj liczbę binarną"<<endl;
+    string liczba_bin;
+    cin>>liczba_bin;
+    int dlugosc = liczba_bin.length();
+    string liczba_hex = "";
+    int licznik = 0;
+    int znak = 0;
+    
+    for (int i = dlugosc-1; i>=0; i--)
+    {
+        if (liczba_bin[i]=='1')
+        {
+            znak+=pow(2,licznik);
+            licznik++;
+        }
+        else if (liczba_bin[i]=='0')
+        {
+            licznik++;
+        }
+        else
+        {
+            cout<<"błąd!";
+            return 0;
+        }
+        
+        if (licznik==4)
+        {
+            if (znak<10)
+            {
+                liczba_hex+=std::to_string(znak);
+            }
+            else
+            {
+                liczba_hex+=znak+55;
+            }
+            licznik=0;
+            znak=0;
+        }
+    }
+    if ((znak<10)&&(znak!=0))
+    {
+        liczba_hex+=std::to_string(znak);
+    }
+    else if (znak!=0)
+    {
+        liczba_hex+=znak+55;
+    }
+    
+    cout<<"0x";
+    for (int i=dlugosc-1; i>=0; i--)
+    {
+        cout<<liczba_hex[i];
+    }
+    return 0;    
+}
