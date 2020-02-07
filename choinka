@@ -1,0 +1,53 @@
+#include <iostream>
+
+using namespace std;
+
+const int x = 11;
+const int y = 71;
+
+int tab[x][y];
+
+void funkcja (int x, int y)
+{
+    int srodek = x/2;
+    int index = 0;
+    int i = 0;
+    
+    while(index<y)
+    {
+        for (i = 0; i<srodek+1; i++)
+        {
+            for (int j = srodek - i; j<= srodek + i; j++)
+            {
+                if (i+index<y) tab[j][i+index]=1;
+            }
+        }
+        
+        index+=srodek+1;
+    }
+}
+
+int main()
+{
+    for (int i = 0; i<y; i++)
+    {
+        for (int j = 0; j<x; j++)
+        {
+            tab[j][i]=0;
+        }
+    }
+    
+    funkcja(x,y);
+    
+    for (int i = 0; i<y; i++)
+    {
+        for (int j = 0; j<x; j++)
+        {
+            cout<<tab[j][i];
+        }
+        cout<<endl;
+    }
+
+
+    return 0;
+}
